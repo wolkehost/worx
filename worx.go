@@ -8,7 +8,9 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/grahms/worx/router"
 	"html/template"
+	"log"
 	"net/http"
+	"strings"
 	"time"
 )
 
@@ -21,12 +23,12 @@ type Application struct {
 	description string
 }
 
-func NewRouter[In, Out any](app *Application, path string) *router.APIEndpoint[In, Out] {
+func Router[In, Out any](app *Application, path string) *router.APIEndpoint[In, Out] {
 
 	return router.New[In, Out](path, app.router.Group(""))
 }
 
-func NewApplication(path, name, version, description string, middlewares ...gin.HandlerFunc) *Application {
+func New(path, name, version, description string, middlewares ...gin.HandlerFunc) *Application {
 	r := Engine()
 
 	config := cors.DefaultConfig()
@@ -55,9 +57,21 @@ func NewApplication(path, name, version, description string, middlewares ...gin.
 
 type _ any
 
-func (a *Application) Run(address string) error {
+func (a *Application) Run(address ...string) {
 	a.renderDocs()
-	return a.engine.Run(address)
+	defaultAddress := ":8000" // Default address
+
+	if len(address) > 0 && address[0] != "" {
+		userAddress := address[0]
+		if !strings.Contains(userAddress, ":") {
+			userAddress = ":" + userAddress
+		}
+		defaultAddress = userAddress
+	}
+
+	if err := a.engine.Run(defaultAddress); err != nil {
+		log.Fatalf("Failed to start server: %v", err)
+	}
 }
 
 func (a *Application) renderDocs() {
