@@ -23,7 +23,7 @@ import (
 )
 
 func main() {
-	app := worx.NewApplication("/api", "Product Catalog API")
+	app := worx.New("/api", "Product Catalog API")
 }
 ```
 
@@ -32,7 +32,7 @@ func main() {
 Create a new API endpoint using the `NewRouter` function:
 
 ```go
-product := worx.NewRouter[Product, ProductResponse](app, "/products")
+product := worx.Router[Product, ProductResponse](app, "/products")
 ```
 
 
