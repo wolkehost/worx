@@ -26,14 +26,14 @@ type Product struct {
 }
 
 func main() {
-	app := worx.NewApplication("/api", "Product API", "1.0.0", "Product API")
+	app := worx.New("/api", "Product API", "1.0.0", "Product API")
 	productTags := router.WithTags([]string{"Product", "something"})
-	product := worx.NewRouter[Product, Product](app, "/products")
+	product := worx.Router[Product, Product](app, "/products")
 	product.HandleCreate("", createHandler, router.WithName("product name"), productTags)
 	product.HandleRead("", handler, productTags)
 	product.HandleRead("/:id", handler, productTags)
 
-	app.Run("8082")
+	app.Run()
 
 }
 

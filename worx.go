@@ -23,12 +23,12 @@ type Application struct {
 	description string
 }
 
-func NewRouter[In, Out any](app *Application, path string) *router.APIEndpoint[In, Out] {
+func Router[In, Out any](app *Application, path string) *router.APIEndpoint[In, Out] {
 
 	return router.New[In, Out](path, app.router.Group(""))
 }
 
-func NewApplication(path, name, version, description string, middlewares ...gin.HandlerFunc) *Application {
+func New(path, name, version, description string, middlewares ...gin.HandlerFunc) *Application {
 	r := Engine()
 
 	config := cors.DefaultConfig()
