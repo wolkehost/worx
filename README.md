@@ -7,7 +7,7 @@ Worx is a framework for building APIs in Go with support for TMF (Telecom Manage
 ### 1. Install Worx:
 
 ```bash
-go get -u github.com/grahms/worx
+go get -u github.com/wolkehost/worx
 ```
 
 ### 2. Initialize Your Application:
@@ -18,8 +18,8 @@ Create a new Worx application:
 package main
 
 import (
-	"github.com/grahms/worx"
-	"github.com/grahms/worx/router"
+	"github.com/wolkehost/worx"
+	"github.com/wolkehost/worx"
 )
 
 func main() {
@@ -56,10 +56,8 @@ product.HandleCreate("", func(product Product, params *router.RequestParams) (*r
 Start your Worx application and listen on a specified port:
 
 ```go
-err := app.Run(":8080")
-if err != nil {
-	panic(err)
-}
+  app.Run()
+
 ```
 
 Now, your Worx application is ready to handle TMF API requests.
