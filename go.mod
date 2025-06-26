@@ -1,4 +1,4 @@
-module github.com/grahms/worx
+module github.com/wolkehost/worx
 
 go 1.20
 
