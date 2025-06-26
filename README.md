@@ -29,7 +29,7 @@ func main() {
 
 ### 3. Define Your API Endpoint:
 
-Create a new API endpoint using the `NewRouter` function:
+Create a new API endpoint using the `Router` function:
 
 ```go
 product := worx.Router[Product, ProductResponse](app, "/products")
@@ -53,7 +53,7 @@ product.HandleCreate("", func(product Product, params *router.RequestParams) (*r
 
 ### 5. Run Your Application:
 
-Start your Worx application and listen on a specified port:
+Start your Worx application and listen on 8000 default port:
 
 ```go
   app.Run()
